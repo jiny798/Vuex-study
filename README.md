@@ -1,4 +1,4 @@
-# vue-todo
+# Vuex Study
 
 ## Project setup
 ```
