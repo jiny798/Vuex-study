@@ -20,7 +20,9 @@ const storage = {
 export const store = new Vuex.Store({
     //store를 외부에서 사용할 수 있다. main.js 로
     state:{
-        todoItems: storage.fetch() // store에서 todoItems 를 가져와서 todoList에 뿌려준다.
+        todoItems: storage.fetch() // store에서 todoItems 를 가져와서 todoList에 뿌려준다
     }
 });
+
+
 
