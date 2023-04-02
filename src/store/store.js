@@ -22,6 +22,12 @@ export const store = new Vuex.Store({
     state:{
         todoItems: storage.fetch() // store에서 todoItems 를 가져와서 todoList에 뿌려준다
     },
+    getters:{
+        storedTodoItems(state){
+            return state.todoItems;
+        }
+    }
+    ,
     mutations:{
         addOneItem(state,todoItem){ //인자로 state를 넣어야 state에 접근가능
             const obj = { completed: false, item: todoItem }
