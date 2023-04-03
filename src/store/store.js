@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import * as getters from './getters'
+import * as mutations from './mutations'
 
 Vue.use(Vuex);
 
@@ -22,33 +24,10 @@ export const store = new Vuex.Store({
     state:{
         todoItems: storage.fetch() // store에서 todoItems 를 가져와서 todoList에 뿌려준다
     },
-    getters:{
-        storedTodoItems(state){
-            return state.todoItems;
-        }
-    }
+    // getters: getters
+    getters // 축약
     ,
-    mutations:{
-        addOneItem(state,todoItem){ //인자로 state를 넣어야 state에 접근가능
-            const obj = { completed: false, item: todoItem }
-            localStorage.setItem(todoItem, JSON.stringify(obj));
-            state.todoItems.push(obj);
-        },
-        removeOneItem(state, payload) {
-            localStorage.removeItem(payload.todoItem.item); //
-            state.todoItems.splice(payload.index, 1); // index 부터 하나 
-        },
-        toggleOneItem(state, payload) {
-            state.todoItems[payload.index].completed = !state.todoItems[payload.index].completed;
-
-            localStorage.removeItem(payload.todoItem.item);
-            localStorage.setItem(payload.todoItem.item, JSON.stringify(payload.todoItem));
-        },
-        clearAllItem(state) {
-            localStorage.clear();
-            state.todoItems = [];
-        }
-    }
+    mutations: mutations
 });
 
 
