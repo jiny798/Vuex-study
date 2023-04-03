@@ -4,11 +4,11 @@
         <li v-for="(todoItem,index) in this.storedTodoItems" v-bind:key="todoItem.item" class="shadow">
              <i class="checkBtn fas fa-check" 
               v-bind:class="{checkBtnCompleted: todoItem.completed}"
-              v-on:click="toggleComplete(todoItem, index)"></i>
+              v-on:click="toggleComplete({todoItem, index})"></i>
 
             <span v-bind:class="{textCompleted: todoItem.completed}">{{ todoItem.item }}</span>
 
-            <span class="removeBtn" v-on:click="removeTodo(todoItem,index)">
+            <span class="removeBtn" v-on:click="removeTodo({todoItem,index})">
                 <i class="fa-solid fa-trash"></i>
             </span>
         </li>
@@ -19,19 +19,19 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters,mapMutations } from 'vuex';
 export default {
     methods:{
-        removeTodo:function(todoItem,index){
+        ...mapMutations({
+          removeTodo:'removeOneItem', //호출할때 (todoItem,index) 인자는 암묵적으로 넘김,객체 하나를 넘기려면 {}감싸쭤야함
+          toggleComplete: 'toggleOneItem'
+        
+        })
+        // toggleComplete: function(todoItem,index){
+        //     //  this.$emit('toggleItem',todoItem,index);
+        //     this.$store.commit('toggleOneItem',{todoItem,index});
 
-            this.$store.commit('removeOneItem',{todoItem,index});
-
-        },
-        toggleComplete: function(todoItem,index){
-            //  this.$emit('toggleItem',todoItem,index);
-            this.$store.commit('toggleOneItem',{todoItem,index});
-
-        }
+        // }
     },
     computed:{
       // todoItems(){
